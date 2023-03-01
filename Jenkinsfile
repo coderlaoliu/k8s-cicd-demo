@@ -70,6 +70,7 @@ pipeline {
 
         stage('deploy to dev') {
             steps {
+                echo '$BRANCH_NAME'
                 input(id: 'deploy-to-dev', message: 'deploy to dev?')
                 sh '''
                     sed -i'' "s#REGISTRY#$REGISTRY#" deploy/cicd-demo-dev.yaml
