@@ -62,6 +62,7 @@ pipeline {
         }
 
         stage('push latest') {
+            sh "echo $BRANCH_NAME"
             steps {
                 sh 'docker tag $REGISTRY/$DOCKERHUB_NAMESPACE/$APP_NAME:SNAPSHOT-$BUILD_NUMBER $REGISTRY/$DOCKERHUB_NAMESPACE/$APP_NAME:latest'
                 sh 'docker push $REGISTRY/$DOCKERHUB_NAMESPACE/$APP_NAME:latest'
@@ -70,7 +71,6 @@ pipeline {
 
         stage('deploy to dev') {
             steps {
-                echo '$BRANCH_NAME'
                 input(id: 'deploy-to-dev', message: 'deploy to dev?')
                 sh '''
                     sed -i'' "s#REGISTRY#$REGISTRY#" deploy/cicd-demo-dev.yaml
