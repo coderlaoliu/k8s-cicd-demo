@@ -61,7 +61,7 @@ pipeline {
             }
         }
 
-        stage('push latest') {
+        stage('push latest2') {
             sh "echo $BRANCH_NAME"
             steps {
                 sh 'docker tag $REGISTRY/$DOCKERHUB_NAMESPACE/$APP_NAME:SNAPSHOT-$BUILD_NUMBER $REGISTRY/$DOCKERHUB_NAMESPACE/$APP_NAME:latest'
@@ -69,7 +69,7 @@ pipeline {
             }
         }
 
-        stage('deploy to dev') {
+        stage('deploy to dev2') {
             steps {
                 input(id: 'deploy-to-dev', message: 'deploy to dev?')
                 sh '''
